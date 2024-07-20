@@ -12,7 +12,7 @@ const db_config = {
 const pool = new Pool(db_config);
 
 pool.on('connect', client => {
-    console.log("DataBase is Conneccted");
+    console.log("DataBase is Connected");
 });
 
 pool.on('remove', client => {
