@@ -6,13 +6,14 @@ const storeController = require("../controllers/storeController");
 const router = Router();
 
 // Route functions are just middle-wares
-router.route("/")
-    .get(storeController.getStoreList)
-    .post(storeController.createStore);
+router
+  .route("/")
+  .get(storeController.getStoreList)
+  .post(storeController.createStore);
 
-router.route("/:storeId")
-    .get(storeController.getCertainStore)
-    .patch(storeController.updateStoreName);
-
+router
+  .route("/:storeId")
+  .get(storeController.getCertainStore)
+  .patch(storeController.updateStoreName);
 
 module.exports = router;

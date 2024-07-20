@@ -1,5 +1,5 @@
 // Store Controllers
-const queries = require("../db/queries");
+const queries = require("../../db/queries");
 const dbConnection = require("../db/connection");
 
 // Get all stores
@@ -75,9 +75,7 @@ exports.updateStoreName = async (req, res) => {
 
     const updateQuery = queries.queryList.UPDATE_STORE_NAME;
     await dbConnection.dbQuery(updateQuery, [newName, storeId]);
-    return res
-      .status(200)
-      .json({ message: `Store's Name is Updated` });
+    return res.status(200).json({ message: `Store's Name is Updated` });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Failed to update a store." });

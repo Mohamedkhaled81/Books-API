@@ -1,5 +1,5 @@
 exports.Store = class Store {
-    constructor(storeId, storeName, storeCode, address){
+    constructor(storeId, storeName,  address){
         this.storeId = storeId;
         this.storeName = storeName;
     }
