@@ -1,19 +1,19 @@
 // Store Controllers
-const queries = require("../../db/queries");
-const dbConnection = require("../db/connection");
+const queries = require("../db/queries");
+const pool = require("../db/pool");
 
 // Get all stores
 exports.getStoreList = async (req, res) => {
   try {
     const storeListQuery = queries.queryList.GET_STORE_LIST_QUERY;
-    const result = await dbConnection.dbQuery(storeListQuery);
+    const result = await pool.query(storeListQuery);
     return res.status(200).json(result.rows);
   } catch (err) {
-    return res
-      .status(500)
-      .json({ error: `Failed to return list of stores :<` });
+    console.error('Error fetching store list:', err);
+    return res.status(500).json({ error: `Failed to return list of stores :<` });
   }
 };
+
 
 // Get certain store by id
 exports.getCertainStore = async (req, res) => {

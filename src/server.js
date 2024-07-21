@@ -2,20 +2,27 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-//const bookRoute = require("./routes/bookRoute");
 const storeRoute = require("./routes/storeRoute");
+const {configs} = require("./configs");
+const { loggingMiddleware } = require("./middlewares/logger");
 
 // Creating instance of express
 const app = express();
 
 // Adding middlewares
 app.use(cors());
+
+// adding the request body to the request object
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// adding custom middleware
+app.use(loggingMiddleware);
+
+
 // Routing
 app.use("/api/v1/stores", storeRoute);
-//app.use("/api/v1/books", bookRoute);
+
 
 // Basic error handling
 app.use((err, req, res, next) => {
@@ -24,7 +31,7 @@ app.use((err, req, res, next) => {
 });
 
 // Starting the server
-const PORT = 3000;
+const PORT = configs.server_port || 3000;
 app.listen(PORT, () => {
   console.log(`Starting Server at http://localhost:${PORT}..`);
 });
