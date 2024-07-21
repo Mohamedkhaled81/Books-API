@@ -22,4 +22,8 @@ pool.on('remove', client => {
   console.log("Database connection is removed..");
 });
 
+pool.on('release', cleint => {
+  console.log("connection is released..")
+})
+
 module.exports = pool;

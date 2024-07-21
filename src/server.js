@@ -16,9 +16,14 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// adding custom middleware
+// adding custom middleware applied on all requests 
 app.use(loggingMiddleware);
 
+// adding a new attribute in req
+app.use((req, res, next) => {
+  req.requestedAt = new Date().toISOString();
+  next();
+})
 
 // Routing
 app.use("/api/v1/stores", storeRoute);

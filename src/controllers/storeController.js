@@ -20,7 +20,7 @@ exports.getCertainStore = async (req, res) => {
   try {
     const store_id = req.params.storeId;
     const singleStoreQuery = queries.queryList.GET_CERTIAN_STORE;
-    const result = await dbConnection.dbQuery(singleStoreQuery, [store_id]);
+    const result = await pool.query(singleStoreQuery, [store_id]);
 
     if (result.rows.length === 1) {
       return res.status(200).json(result.rows[0]);
@@ -45,7 +45,7 @@ exports.createStore = async (req, res) => {
 
     const storeCreateQuery = queries.queryList.CREATE_STORE_QUERY;
 
-    await dbConnection.dbQuery(storeCreateQuery, [name, address]);
+    await pool.query(storeCreateQuery, [name, address]);
 
     return res.status(201).json({ data: "Store is created in DB." });
   } catch (err) {
@@ -61,7 +61,7 @@ exports.updateStoreName = async (req, res) => {
     const storeId = req.params.storeId;
 
     const checkStoreExisted = queries.queryList.GET_CERTIAN_STORE;
-    const result = await dbConnection.dbQuery(checkStoreExisted, [storeId]);
+    const result = await pool.query(checkStoreExisted, [storeId]);
 
     console.log(result.rows[0]);
 
@@ -74,7 +74,7 @@ exports.updateStoreName = async (req, res) => {
     }
 
     const updateQuery = queries.queryList.UPDATE_STORE_NAME;
-    await dbConnection.dbQuery(updateQuery, [newName, storeId]);
+    await pool.query(updateQuery, [newName, storeId]);
     return res.status(200).json({ message: `Store's Name is Updated` });
   } catch (err) {
     console.log(err);
