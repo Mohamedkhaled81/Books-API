@@ -12,6 +12,8 @@ const db_config = {
   max: 20,
 };
 
+
+
 const pool = new Pool(db_config);
 
 pool.on('connect', client => {
